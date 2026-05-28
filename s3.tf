@@ -1,5 +1,9 @@
+resource "random_id" "bucket_suffix" {
+  byte_length = 4
+}
+
 resource "aws_s3_bucket" "assets" {
-  bucket        = "ims-assets-sofovic"
+  bucket        = "ims-assets-${random_id.bucket_suffix.hex}"
   force_destroy = true
 
   lifecycle {
@@ -7,7 +11,7 @@ resource "aws_s3_bucket" "assets" {
   }
 
   tags = {
-    Name = "ims-assets-sofovic"
+    Name = "ims-assets"
   }
 }
 

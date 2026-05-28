@@ -2,7 +2,7 @@ resource "aws_launch_template" "backend" {
   name_prefix   = "backend-template-"
   image_id      = "ami-0c02fb55956c7d316" 
   instance_type = "t2.small"
-  key_name      = "vockey"
+  key_name      = "labsuser"
 
   vpc_security_group_ids = [aws_security_group.backend.id]
 
@@ -26,7 +26,7 @@ resource "aws_launch_template" "frontend" {
   name_prefix   = "frontend-template-"
   image_id      = "ami-0c02fb55956c7d316"
   instance_type = "t2.small"
-  key_name      = "vockey"
+  key_name      = "labsuser"
 
   vpc_security_group_ids = [aws_security_group.frontend.id]
 
