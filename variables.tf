@@ -26,7 +26,7 @@ variable "backend_url" {
 variable "s3_url" {
   description = "S3 bucket URL for assets"
   type        = string
-  default     = "https://ims-assets.s3.amazonaws.com"
+  default     = "https://ims-assets-sofovic.s3.amazonaws.com"
 }
 
 variable "github_repo" {

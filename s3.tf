@@ -1,9 +1,13 @@
 resource "aws_s3_bucket" "assets" {
-  bucket        = "ims-assets"
+  bucket        = "ims-assets-sofovic"
   force_destroy = true
 
+  lifecycle {
+    ignore_changes = [object_lock_enabled]
+  }
+
   tags = {
-    Name = "ims-assets"
+    Name = "ims-assets-sofovic"
   }
 }
 
