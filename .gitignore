@@ -1,7 +1,7 @@
 *.tfstate
-*.tfstate.backup
-.terraform.tfstate.lock.info
+*.tfstate.*
 .terraform/
+.terraform.lock.hcl
 *.tfvars
 *.tfvars.json
 crash.log
@@ -12,3 +12,7 @@ override.tf.json
 *_override.tf.json
 .terraformrc
 terraform.rc
+.DS_Store
+.AppleDouble
+.LSOverhang
+**/.DS_Store
