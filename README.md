@@ -10,8 +10,7 @@ Terraform kod za deployment Inventory Management System aplikacije na AWS.
 - **RDS** — PostgreSQL baza u private subnetima
 - **S3** — bucket za statične fajlove (slike)
 - **Auto Scaling Group** — automatsko skaliranje frontend i backend instanci
-- **CloudWatch** — monitoring i logovanje
-
+- **Application Load Balancer** - Load Balancer za frontend i backend instance
 ## Struktura
 
 ```
@@ -36,8 +35,8 @@ terraform-ims/
 
 ## Preduslovi
 
-- [Terraform](https://developer.hashicorp.com/terraform/install) instaliran
-- [AWS CLI](https://aws.amazon.com/cli/) instaliran
+- Terraform instaliran
+- AWS CLI instaliran
 - AWS Academy sandbox sesija pokrenuta
 
 ## Konfiguracija kredencijala
@@ -81,6 +80,11 @@ terraform apply
 
 Iako bi kod za kreiranje i upload asseta u S3 Bucket trebao raditi, Terraform izbacuje grešku do koje dolazi zbog ograničenja Sanboxa. Tako da je S3 bucket potrebno ručno kreirati i u njega uploadovati assete.
 
+Output greške:
+```bash
+
+```
+
 
 ## Outputi
 
@@ -91,9 +95,10 @@ Nakon uspješnog `terraform apply` dobićeš:
 | `frontend_alb_dns` | URL za pristup aplikaciji |
 | `backend_alb_dns` | URL backend ALB-a |
 | `rds_endpoint` | Endpoint baze podataka |
+| `s3_bucket_url` | URL za pristup S3 bucketu |
 
 
-Aplikaciji pristupaš preko `frontend_alb_dns` linka.
+Aplikaciji se pristupa preko `frontend_alb_dns` linka.
 
 
 ## Uništavanje infrastrukture
