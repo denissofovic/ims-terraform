@@ -42,16 +42,14 @@ terraform-ims/
 
 ## Konfiguracija kredencijala
 
-Nakon pokretanja lab sesije na AWS Academy, kopiraj kredencijale u `~/.aws/credentials`:
+Nakon pokretanja lab sesije na AWS Academy, u terminal ukucaj sljedecu komandu:
 
 ```bash
-cat > ~/.aws/credentials << 'EOF'
-[default]
-aws_access_key_id=ТВОЈ_KEY
-aws_secret_access_key=ТВОЈ_SECRET
-aws_session_token=ТВОЈ_TOKEN
-EOF
+export AWS_ACCESS_KEY_ID="aws_access_key_id" 
+export AWS_SECRET_ACCESS_KEY="aws_secret_acces_key" 
+export AWS_SESSION_TOKEN="aws_session_token" 
 ```
+Vrijednosti za sve ključeve se mogu naći u Workbench->Details->AWS CLI
 
 Provjeri konekciju:
 
@@ -79,15 +77,10 @@ terraform plan
 terraform apply
 ```
 
-### 4. S3 bucket (ako dođe do greške sa Object Lock)
+### 4. S3 bucket problem 
 
-Ako `terraform apply` baci grešku za S3 bucket, importuj ga i ponovi:
+Iako bi kod za kreiranje i upload asseta u S3 Bucket trebao raditi, Terraform izbacuje grešku do koje dolazi zbog ograničenja Sanboxa. Tako da je S3 bucket potrebno ručno kreirati i u njega uploadovati assete.
 
-```bash
-terraform state rm aws_s3_bucket.assets
-terraform import aws_s3_bucket.assets <bucket-naziv>
-terraform apply
-```
 
 ## Outputi
 
@@ -98,31 +91,13 @@ Nakon uspješnog `terraform apply` dobićeš:
 | `frontend_alb_dns` | URL za pristup aplikaciji |
 | `backend_alb_dns` | URL backend ALB-a |
 | `rds_endpoint` | Endpoint baze podataka |
-| `s3_bucket_url` | URL S3 bucketa |
+
 
 Aplikaciji pristupaš preko `frontend_alb_dns` linka.
 
-## Promjena konfiguracije
-
-Sve varijable se nalaze u `variables.tf`:
-
-| Varijabla | Opis |
-|-----------|------|
-| `db_host` | RDS endpoint |
-| `db_name` | Naziv baze |
-| `db_username` | Korisničko ime za bazu |
-| `db_password` | Lozinka za bazu |
-| `backend_url` | Backend ALB DNS za frontend |
-| `s3_url` | S3 bucket URL |
 
 ## Uništavanje infrastrukture
 
 ```bash
 terraform destroy
 ```
-
-## Napomene
-
-- AWS Academy sandbox kredencijali istječu kada sesija završi — moraš ih osvježiti pri svakom pokretanju
-- Docker build na EC2 instancama traje 10-15 minuta — instance postaju healthy nakon toga
-- `terraform.tfstate` fajl nije u git repozitoriju — čuvaj ga lokalno
