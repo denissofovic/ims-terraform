@@ -20,13 +20,13 @@ variable "db_name" {
 variable "backend_url" {
   description = "Backend ALB DNS name"
   type        = string
-  default     = "http://backend-alb-160691908.us-east-1.elb.amazonaws.com"
+  default     = "backend-alb-861841398.us-east-1.elb.amazonaws.com"
 }
 
 variable "s3_url" {
   description = "S3 bucket URL for assets"
   type        = string
-  default     = "https://ims-assets-sofovic.s3.amazonaws.com"
+  default     = "https://ims-assets-9780cb22.s3.amazonaws.com"
 }
 
 variable "github_repo" {
@@ -38,5 +38,5 @@ variable "github_repo" {
 variable "db_host" {
   description = "Hostname for RDS DB"
   type = string
-  default = "ims-database.c805x3fvhurr.us-east-1.rds.amazonaws.com:5432"
+  default = "ims-database.c805x3fvhurr.us-east-1.rds.amazonaws.com"
 }

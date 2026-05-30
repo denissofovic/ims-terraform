@@ -9,13 +9,8 @@ sudo systemctl enable docker
 
 sudo usermod -aG docker ubuntu
 
-sleep 10
 
 cd /home/ubuntu
-
-if [ -d "inventory-managment-system" ]; then
-    rm -rf inventory-managment-system
-fi
 
 git clone https://github.com/denissofovic/inventory-managment-system.git
 

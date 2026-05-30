@@ -1,13 +1,10 @@
-resource "random_id" "bucket_suffix" {
-  byte_length = 4
-}
-
 resource "aws_s3_bucket" "assets" {
-  bucket        = "ims-assets-${random_id.bucket_suffix.hex}"
+  bucket        = "ims-assets-sofovic"
   force_destroy = true
 
   lifecycle {
-    ignore_changes = [object_lock_enabled]
+    ignore_changes  = [object_lock_enabled]
+    prevent_destroy = false
   }
 
   tags = {
@@ -29,25 +26,29 @@ resource "aws_s3_bucket_policy" "assets" {
 
   policy = jsonencode({
     Version = "2012-10-17"
-    Statement = [
-      {
-        Effect    = "Allow"
-        Principal = "*"
-        Action    = "s3:GetObject"
-        Resource  = "${aws_s3_bucket.assets.arn}/*"
-      }
-    ]
+    Statement = [{
+      Effect    = "Allow"
+      Principal = "*"
+      Action    = "s3:GetObject"
+      Resource  = "${aws_s3_bucket.assets.arn}/*"
+    }]
   })
 
   depends_on = [aws_s3_bucket_public_access_block.assets]
 }
 
-resource "aws_s3_object" "assets" {
-  for_each = fileset("${path.module}/assets", "*")
-
+resource "aws_s3_object" "dccs_png" {
   bucket       = aws_s3_bucket.assets.id
-  key          = each.value
-  source       = "${path.module}/assets/${each.value}"
-  etag         = filemd5("${path.module}/assets/${each.value}")
+  key          = "dccs.png"
+  source       = "${path.module}/assets/dccs.png"
+  etag         = filemd5("${path.module}/assets/dccs.png")
   content_type = "image/png"
+}
+
+resource "aws_s3_object" "dccs_svg" {
+  bucket       = aws_s3_bucket.assets.id
+  key          = "dccs.svg"
+  source       = "${path.module}/assets/dccs.svg"
+  etag         = filemd5("${path.module}/assets/dccs.svg")
+  content_type = "image/svg+xml"
 }

@@ -19,6 +19,7 @@ resource "aws_autoscaling_group" "frontend" {
 
   health_check_type         = "ELB"
   health_check_grace_period = 900
+  default_cooldown = 500
 
   tag {
     key                 = "Name"
@@ -48,6 +49,8 @@ resource "aws_autoscaling_group" "backend" {
 
   health_check_type         = "ELB"
   health_check_grace_period = 900
+  default_cooldown = 500
+
 
   tag {
     key                 = "Name"
@@ -56,17 +59,20 @@ resource "aws_autoscaling_group" "backend" {
   }
 }
 
+
 resource "aws_autoscaling_policy" "frontend_cpu_policy" {
   name                   = "frontend-cpu-scaling"
   autoscaling_group_name = aws_autoscaling_group.frontend.name
   policy_type            = "TargetTrackingScaling"
+
+  estimated_instance_warmup = 600
 
   target_tracking_configuration {
     predefined_metric_specification {
       predefined_metric_type = "ASGAverageCPUUtilization"
     }
 
-    target_value = 50
+    target_value = 80
   }
 }
 
@@ -75,6 +81,9 @@ resource "aws_autoscaling_policy" "backend_cpu_policy" {
   name                   = "backend-cpu-scaling"
   autoscaling_group_name = aws_autoscaling_group.backend.name
   policy_type            = "TargetTrackingScaling"
+
+  estimated_instance_warmup = 600
+
 
   target_tracking_configuration {
     predefined_metric_specification {
