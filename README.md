@@ -82,7 +82,11 @@ Iako bi kod za kreiranje i upload asseta u S3 Bucket trebao raditi, Terraform iz
 
 Output greške:
 ```bash
-
+│ Error: reading S3 Bucket (ims-assets-sofovic) object lock configuration: operation error S3: GetObjectLockConfiguration, https response error StatusCode: 403, RequestID: SSTECRDN13MJA1KB, HostID: bVEhgzSfhEwayDTbLXm7aea9x2EHam/hOwIERy5Omz24EP9pvtkJesvuNoNAa/keTFoLlxbkI3k=, api error AccessDenied: User: arn:aws:sts::773198974875:assumed-role/voclabs/user3932165=Denis_Sofovic is not authorized to perform: s3:GetBucketObjectLockConfiguration on resource: "arn:aws:s3:::ims-assets-sofovic" with an explicit deny in an identity-based policy
+│
+│   with aws_s3_bucket.assets,
+│   on s3.tf line 1, in resource "aws_s3_bucket" "assets":
+│    1: resource "aws_s3_bucket" "assets" {
 ```
 
 
