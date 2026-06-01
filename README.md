@@ -109,12 +109,9 @@ Nakon uspješnog `terraform apply` dobićeš:
 
 Aplikaciji se pristupa preko `frontend_alb_dns` linka.
 
-> **Napomena:** Instancama ponekad treba i do 20 minuta da dobiju `healthy` status u
+> **Napomena:** Instancama ponekad treba i do 15 minuta da dobiju `healthy` status u
 > Target Group, jer user data skripta mora proći kroz instalaciju Dockera, kloniranje
-> repozitorija i Docker build pri svakom pokretanju instance. U nekim slučajevima
-> instance mogu ostati u statusu `unhealthy` u konzoli čak i kada aplikacija normalno
-> radi i dostupna je preko Load Balancera — ovo je poznato ograničenje health check
-> konfiguracije u sandbox okruženju i ne utiče na funkcionisanje aplikacije.
+> repozitorija i Docker build pri svakom pokretanju instance. 
 
 ## Uništavanje infrastrukture
 
