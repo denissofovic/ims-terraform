@@ -5,7 +5,7 @@ resource "aws_lb_target_group" "backend" {
   vpc_id   = aws_vpc.main.id
 
   health_check {
-  path                = "/"
+  path                = "/health"
   protocol            = "HTTP"
   port                = "8080"
   matcher             = "200"
